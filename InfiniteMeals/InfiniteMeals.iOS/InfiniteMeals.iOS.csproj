@@ -59,8 +59,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>Apple Distribution: Infinite Options, LLC (8V66NC2T37)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>Prep To Your Door</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon-1.appiconset\Contents.json">
@@ -78,6 +79,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <ImageAsset Include="Resources\LaunchScreen.xcassets\Contents.json" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -302,6 +304,8 @@
     <BundleResource Include="Resources\summaryStatus.png" />
     <BundleResource Include="Resources\tempeh.jpeg" />
     <BundleResource Include="Resources\yellowbird.png" />
+    <BundleResource Include="Resources\fbicon.png" />
+    <BundleResource Include="Resources\googleicon.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024x1024.png">
@@ -484,5 +488,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\tempeh.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
 </Project>
