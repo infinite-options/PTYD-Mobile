@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Linq;
 using System.Text;
 using System.Net;
@@ -156,11 +157,13 @@ namespace InfiniteMeals.ViewModel.Login
 
         }
 
-        public async Task<LoginResponse> socialLogin(string userUid) {
+        public async Task<LoginResponse> socialLogin(string userUid)
+        {
             const string deviceBrowserType = "Mobile";
             const string deviceIpAddress = "0.0.0.0";
 
-            LoginPost loginPostContent = new LoginPost() { // object that contains ip address and browser type; will be converted into a json object 
+            LoginPost loginPostContent = new LoginPost()
+            { // object that contains ip address and browser type; will be converted into a json object 
                 ipAddress = deviceIpAddress.ToString(),
                 browserType = deviceBrowserType
             };
@@ -170,7 +173,8 @@ namespace InfiniteMeals.ViewModel.Login
             var httpContent = new StringContent(loginPostContentJson, Encoding.UTF8, "application/json"); // encode orderContentJson into format to send to database
 
             var response = await client.PostAsync(socialLoginUrl + userUid, httpContent); // try to post to database
-            if(response.StatusCode == HttpStatusCode.OK) {
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
                 var responseContent = await response.Content.ReadAsStringAsync();
 
                 var loginResponse = JsonConvert.DeserializeObject<LoginResponse>(responseContent);
@@ -216,7 +220,7 @@ namespace InfiniteMeals.ViewModel.Login
                 LoginId = loginResponse.LoginAttemptLog.LoginId,
                 Email = loginResponse.Result.Result[0].UserEmail
             };
-            
+
             await App.Database.SaveItemAsync(userSessionInformation); // send login session to local database
             System.Diagnostics.Debug.WriteLine("user logged in: " + App.Database.GetLastItem().Email);
             App.setLoggedIn(true);
@@ -226,12 +230,14 @@ namespace InfiniteMeals.ViewModel.Login
 
         // handler for when google login button is clicked 
         [Obsolete]
-        private void googleLoginButtonClicked(object sender, EventArgs e) {
+        private void googleLoginButtonClicked(object sender, EventArgs e)
+        {
             string clientId = null;
             string redirectUri = null;
 
             // retrieve client id based on the platform
-            switch(Device.RuntimePlatform) {
+            switch (Device.RuntimePlatform)
+            {
                 case Device.iOS:
                     clientId = SocialMediaLoginConstants.GoogleiOSClientId;
                     redirectUri = SocialMediaLoginConstants.GoogleiOSRedirectUrl;
@@ -267,11 +273,13 @@ namespace InfiniteMeals.ViewModel.Login
 
         // handler for when facebook login button is clicked
         [Obsolete]
-        private void facebookLoginButtonClicked(object sender, EventArgs e) {
+        private void facebookLoginButtonClicked(object sender, EventArgs e)
+        {
             string clientId = null;
             string redirectUri = null;
 
-            switch (Device.RuntimePlatform) {
+            switch (Device.RuntimePlatform)
+            {
                 case Device.iOS:
                     clientId = SocialMediaLoginConstants.FacebookiOSClientId;
                     redirectUri = SocialMediaLoginConstants.FacebookiOSRedirectUrl;
@@ -298,21 +306,25 @@ namespace InfiniteMeals.ViewModel.Login
             var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
             presenter.Login(authenticator);
 
-            
+
         }
 
         // function when the auth is completed without any errors
         [Obsolete]
-        async void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e) {
+        async void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
+        {
             var authenticator = sender as OAuth2Authenticator;
-            if(authenticator != null) {
+            if (authenticator != null)
+            {
                 authenticator.Completed -= OnAuthCompleted;
                 authenticator.Error -= OnAuthError;
             }
             Debug.WriteLine("starting authentication");
-            if(e.IsAuthenticated) {
+            if (e.IsAuthenticated)
+            {
                 Debug.WriteLine("first authentication");
-                if(authenticator.AuthorizeUrl.Host == "www.facebook.com") {
+                if (authenticator.AuthorizeUrl.Host == "www.facebook.com")
+                {
                     Debug.WriteLine("authenticated!!!");
                     FacebookEmail facebookEmail = null;
 
@@ -335,13 +347,15 @@ namespace InfiniteMeals.ViewModel.Login
                     Application.Current.Properties.Add("DisplayName", facebookEmail.Name);
                     Application.Current.Properties.Add("EmailAddress", facebookEmail.Email);
                     Application.Current.Properties.Add("ProfilePicture", facebookEmail.Picture.Data.Url);
-                    
-                    try {
+
+                    try
+                    {
                         var socialAccountJson = await client.GetStringAsync(socialUrl + facebookEmail.Email); // get the user's account from the social accounts table
-                   
+
                         SocialAccountResponse socialAccountResponse = JsonConvert.DeserializeObject<SocialAccountResponse>(socialAccountJson);
 
-                        if (socialAccountResponse.Result.Result.Length == 0) { // if the social account doesn't exist, navigate to social sign up page
+                        if (socialAccountResponse.Result.Result.Length == 0)
+                        { // if the social account doesn't exist, navigate to social sign up page
                             Debug.WriteLine("no social account found");
                             string accessToken = e.Account.Properties["access_token"]; // access token retrieved from facebook
                             // facebook doesn't provide refresh token!
@@ -350,7 +364,8 @@ namespace InfiniteMeals.ViewModel.Login
 
                             await Navigation.PushAsync(socialSignUpPage);
                         }
-                        else { // user's social account exists and login attempt is made
+                        else
+                        { // user's social account exists and login attempt is made
                             Debug.WriteLine("social account found, logging in");
                             LoginResponse socialLoginAttempt = await socialLogin(socialAccountResponse.Result.Result[0].UserUid);
                             captureLoginSession(socialLoginAttempt);
@@ -358,11 +373,14 @@ namespace InfiniteMeals.ViewModel.Login
 
                         }
                     }
-                    catch (Exception ex) {
+                    catch (Exception ex)
+                    {
                         System.Diagnostics.Debug.WriteLine(ex.Message);
                     }
 
-                } else {
+                }
+                else
+                {
                     User user = null;
 
                     // If the user is authenticated, request their basic user data from Google
@@ -370,16 +388,18 @@ namespace InfiniteMeals.ViewModel.Login
 
                     var request = new OAuth2Request("GET", new Uri(SocialMediaLoginConstants.GoogleUserInfoUrl), null, e.Account); // create the request to get the user's google info
                     var response = await request.GetResponseAsync();
-                    if(response != null) {
+                    if (response != null)
+                    {
                         // Deserialize the data and store it in the account store
                         // The users email address will be used to identify data in SimpleDB
                         string userJson = await response.GetResponseTextAsync();
                         Debug.WriteLine("user json: " + userJson);
                         user = JsonConvert.DeserializeObject<User>(userJson);
-                        
+
                     }
 
-                    if(account != null) {
+                    if (account != null)
+                    {
                         store.Delete(account, SocialMediaLoginConstants.AppName);
                     }
 
@@ -398,12 +418,14 @@ namespace InfiniteMeals.ViewModel.Login
                     Application.Current.Properties.Add("DisplayName", user.Name);
                     Application.Current.Properties.Add("EmailAddress", user.Email);
                     Application.Current.Properties.Add("ProfilePicture", user.Picture);
-                    try {
+                    try
+                    {
                         var socialAccountJson = await client.GetStringAsync(socialUrl + user.Email); // get the user's account from the social accounts table
 
                         SocialAccountResponse socialAccountResponse = JsonConvert.DeserializeObject<SocialAccountResponse>(socialAccountJson);
 
-                        if (socialAccountResponse.Result.Result.Length == 0) { // if the social account doesn't exist, navigate to social sign up page
+                        if (socialAccountResponse.Result.Result.Length == 0)
+                        { // if the social account doesn't exist, navigate to social sign up page
                             string accessToken = e.Account.Properties["access_token"]; // access token retrieved from google 
                             string refreshToken = e.Account.Properties["refresh_token"]; // refresh token retrieved from google 
                             string socialMedia = "Google";
@@ -411,13 +433,16 @@ namespace InfiniteMeals.ViewModel.Login
 
                             await Navigation.PushAsync(socialSignUpPage);
                         }
-                        else { // user's social account exists and login attempt is made
+                        else
+                        { // user's social account exists and login attempt is made
                             LoginResponse socialLoginAttempt = await socialLogin(socialAccountResponse.Result.Result[0].UserUid);
                             captureLoginSession(socialLoginAttempt);
                             await Navigation.PopAsync(); // go back to home page
 
                         }
-                    } catch(Exception ex) {
+                    }
+                    catch (Exception ex)
+                    {
                         System.Diagnostics.Debug.WriteLine(ex.Message);
                     }
 
@@ -428,9 +453,11 @@ namespace InfiniteMeals.ViewModel.Login
 
         // function when authenticator gives an error
         [Obsolete]
-        void OnAuthError(object sender, AuthenticatorErrorEventArgs e) {
+        void OnAuthError(object sender, AuthenticatorErrorEventArgs e)
+        {
             var authenticator = sender as OAuth2Authenticator;
-            if(authenticator != null) {
+            if (authenticator != null)
+            {
                 authenticator.Completed -= OnAuthCompleted;
                 authenticator.Error -= OnAuthError;
             }

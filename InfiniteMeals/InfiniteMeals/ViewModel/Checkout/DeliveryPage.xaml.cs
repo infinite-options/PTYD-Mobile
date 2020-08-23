@@ -11,6 +11,8 @@ using Xamarin.Essentials;
 using System.Net;
 using InfiniteMeals.Model.Subscribe;
 using InfiniteMeals.Model.Checkout;
+using Newtonsoft.Json;
+using InfiniteMeals.Model.Database;
 
 namespace InfiniteMeals.ViewModel.Checkout {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -18,14 +20,87 @@ namespace InfiniteMeals.ViewModel.Checkout {
     // first step in checkout process
     // prompts user to enter delivery information
     public partial class DeliveryPage : ContentPage {
+        private string acctUrl = "https://uavi7wugua.execute-api.us-west-1.amazonaws.com/dev/api/v2/accountpurchases/";
+        private static string userID;
 
         public DeliveryPage() {
             InitializeComponent();
+            preloadDeliveryInfo();
         }
 
+        // Preloads Existing Entries to Text Fields
+        private void preloadDeliveryInfo()
+        {
+            WebClient client = new WebClient();
+            // Get user zipcodes
+            var table = App.Database.GetLastItem();
+            userID = table.UserUid;
+            var userInfo = client.DownloadString(acctUrl + userID);
+            var userInfoObj = JsonConvert.DeserializeObject<UserInformation>(userInfo);
+
+            this.firstNameEntry.Text = userInfoObj.Result[0].DeliveryFirstName;
+            this.lastNameEntry.Text = userInfoObj.Result[0].DeliveryLastName;
+            // Phone
+            string entirePhone = (string) userInfoObj.Result[0].DeliveryPhone.ToString();
+            this.firstPhoneNumberEntry.Text = entirePhone.Substring(0, 3);
+            this.middlePhoneNumberEntry.Text = entirePhone.Substring(3, 5);
+            this.lastPhoneNumberEntry.Text = entirePhone.Substring(6);
+            this.addressOneEntry.Text = userInfoObj.Result[0].DeliveryAddress;
+            this.zipCodeEntry.Text = userInfoObj.Result[0].DeliveryZip.ToString();
+            this.cityEntry.Text = userInfoObj.Result[0].DeliveryCity;
+            this.stateEntry.Text = userInfoObj.Result[0].DeliveryState;
+
+            if (String.IsNullOrEmpty(firstNameEntry.Text))
+            {
+                this.firstNameWarning.IsVisible = true; // show warning if first name entry is empty
+            }
+            if (String.IsNullOrEmpty(lastNameEntry.Text))
+            {
+                this.lastNameWarning.IsVisible = true; // show warning if last name entry is empty
+            }
+            if (String.IsNullOrEmpty(firstPhoneNumberEntry.Text))
+            {
+                this.phoneNumberWarning.IsVisible = true; // show warning if last name entry is empty
+            }
+            if (String.IsNullOrEmpty(middlePhoneNumberEntry.Text))
+            {
+                this.phoneNumberWarning.IsVisible = true; // show warning if last name entry is empty
+            }
+            if (String.IsNullOrEmpty(lastPhoneNumberEntry.Text))
+            {
+                this.phoneNumberWarning.IsVisible = true; // show warning if last name entry is empty
+            }
+            if (String.IsNullOrEmpty(addressOneEntry.Text))
+            {
+                this.addressWarning.IsVisible = true; // show warning if last name entry is empty
+            }
+            if (String.IsNullOrEmpty(zipCodeEntry.Text))
+            {
+                this.zipCodeWarning.IsVisible = true; // show warning if last name entry is empty
+            }
+            if (String.IsNullOrEmpty(cityEntry.Text))
+            {
+                this.cityWarning.IsVisible = true; // show warning if last name entry is empty
+            }
+            if (String.IsNullOrEmpty(stateEntry.Text))
+            {
+                this.stateWarning.IsVisible = true; // show warning if last name entry is empty
+            }
+        }
+
+
         // clicked continue button event handler
-        private async void ContinueToPaymentClicked(object sender, EventArgs e) { 
-            if (String.IsNullOrEmpty(this.firstNameEntry.Text) || String.IsNullOrEmpty(this.lastNameEntry.Text) || String.IsNullOrEmpty(this.addressOneEntry.Text) || String.IsNullOrEmpty(this.zipCodeEntry.Text) ||
+        private async void ContinueToPaymentClicked(object sender, EventArgs e) {
+
+            if(firstNameWarning.IsVisible.Equals(true) || lastNameWarning.IsVisible.Equals(true) ||
+                phoneNumberWarning.IsVisible.Equals(true) || addressWarning.IsVisible.Equals(true) ||
+                zipCodeWarning.IsVisible.Equals(true) || cityWarning.IsVisible.Equals(true) ||
+                stateWarning.IsVisible.Equals(true))
+            {
+                await DisplayAlert("Error: Empty Field(s)", "Please fill all fields", "OK");
+            }
+
+            else if (String.IsNullOrEmpty(this.firstNameEntry.Text) || String.IsNullOrEmpty(this.lastNameEntry.Text) || String.IsNullOrEmpty(this.addressOneEntry.Text) || String.IsNullOrEmpty(this.zipCodeEntry.Text) ||
                String.IsNullOrEmpty(this.cityEntry.Text) || String.IsNullOrEmpty(this.stateEntry.Text)) { // checks that all fields are filled out
                 await DisplayAlert("Error: Empty Field(s)", "Please fill all fields", "OK");
             }

@@ -80,7 +80,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -276,6 +275,33 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <BundleResource Include="Resources\PTYD.ipa" />
+    <BundleResource Include="Resources\austin.png" />
+    <BundleResource Include="Resources\bibimbap.jpeg" />
+    <BundleResource Include="Resources\bouldin.jpeg" />
+    <BundleResource Include="Resources\buddha.jpeg" />
+    <BundleResource Include="Resources\buffalo.jpeg" />
+    <BundleResource Include="Resources\cacaooats.jpeg" />
+    <BundleResource Include="Resources\caesarsalad.jpeg" />
+    <BundleResource Include="Resources\carrot.jpg" />
+    <BundleResource Include="Resources\cobbsalad.jpeg" />
+    <BundleResource Include="Resources\credo.jpeg" />
+    <BundleResource Include="Resources\curcuma.jpeg" />
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\Default-Portrait.png" />
+    <BundleResource Include="Resources\Default-Portrait%402x.png" />
+    <BundleResource Include="Resources\Default.png" />
+    <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\fave.png" />
+    <BundleResource Include="Resources\fox.jpeg" />
+    <BundleResource Include="Resources\fronks.png" />
+    <BundleResource Include="Resources\info.jpeg" />
+    <BundleResource Include="Resources\jbg.png" />
+    <BundleResource Include="Resources\paymentStatus.png" />
+    <BundleResource Include="Resources\shippingStatus.png" />
+    <BundleResource Include="Resources\siete.png" />
+    <BundleResource Include="Resources\summaryStatus.png" />
+    <BundleResource Include="Resources\tempeh.jpeg" />
+    <BundleResource Include="Resources\yellowbird.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024x1024.png">

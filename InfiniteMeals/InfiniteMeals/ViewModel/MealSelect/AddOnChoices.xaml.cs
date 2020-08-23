@@ -32,35 +32,41 @@ namespace InfiniteMeals.ViewModel.MealSelect
         private static ObservableCollection<MealGroup> grouped6 { get; set; }
 
         // Week 1
-        public static MealGroup addAddOnGroup = new MealGroup() { LongName = "Add Ons", ShortName = "am" };
-        public static MealGroup addMealGroup = new MealGroup() { LongName = "Additional Meals", ShortName = "asm" };
-        public static MealGroup addSmoothieGroup = new MealGroup() { LongName = "Additional Smoothies", ShortName = "as" };
+        public static MealGroup addAddOnGroup = new MealGroup() { LongName = "Add Ons" };
+        public static MealGroup addMealGroup = new MealGroup() { LongName = "Additional Meals" };
+        public static MealGroup addSmoothieGroup = new MealGroup() { LongName = "Additional Smoothies" };
         // Week 2
-        public static MealGroup addAddOnGroup2 = new MealGroup() { LongName = "Add Ons", ShortName = "am" };
-        public static MealGroup addMealGroup2 = new MealGroup() { LongName = "Additional Meals", ShortName = "asm" };
-        public static MealGroup addSmoothieGroup2 = new MealGroup() { LongName = "Additional Smoothies", ShortName = "as" };
+        public static MealGroup addAddOnGroup2 = new MealGroup() { LongName = "Add Ons" };
+        public static MealGroup addMealGroup2 = new MealGroup() { LongName = "Additional Meals" };
+        public static MealGroup addSmoothieGroup2 = new MealGroup() { LongName = "Additional Smoothies" };
         // Week 3
-        public static MealGroup addAddOnGroup3 = new MealGroup() { LongName = "Add Ons", ShortName = "am" };
-        public static MealGroup addMealGroup3 = new MealGroup() { LongName = "Additional Meals", ShortName = "asm" };
-        public static MealGroup addSmoothieGroup3 = new MealGroup() { LongName = "Additional Smoothies", ShortName = "as" };
+        public static MealGroup addAddOnGroup3 = new MealGroup() { LongName = "Add Ons" };
+        public static MealGroup addMealGroup3 = new MealGroup() { LongName = "Additional Meals" };
+        public static MealGroup addSmoothieGroup3 = new MealGroup() { LongName = "Additional Smoothies" };
         // Week 4
-        public static MealGroup addAddOnGroup4 = new MealGroup() { LongName = "Add Ons", ShortName = "am" };
-        public static MealGroup addMealGroup4 = new MealGroup() { LongName = "Additional Meals", ShortName = "asm" };
-        public static MealGroup addSmoothieGroup4 = new MealGroup() { LongName = "Additional Smoothies", ShortName = "as" };
+        public static MealGroup addAddOnGroup4 = new MealGroup() { LongName = "Add Ons" };
+        public static MealGroup addMealGroup4 = new MealGroup() { LongName = "Additional Meals" };
+        public static MealGroup addSmoothieGroup4 = new MealGroup() { LongName = "Additional Smoothies" };
         // Week 5
-        public static MealGroup addAddOnGroup5 = new MealGroup() { LongName = "Add Ons", ShortName = "am" };
-        public static MealGroup addMealGroup5 = new MealGroup() { LongName = "Additional Meals", ShortName = "asm" };
-        public static MealGroup addSmoothieGroup5 = new MealGroup() { LongName = "Additional Smoothies", ShortName = "as" };
+        public static MealGroup addAddOnGroup5 = new MealGroup() { LongName = "Add Ons" };
+        public static MealGroup addMealGroup5 = new MealGroup() { LongName = "Additional Meals" };
+        public static MealGroup addSmoothieGroup5 = new MealGroup() { LongName = "Additional Smoothies" };
         // Week 6
-        public static MealGroup addAddOnGroup6 = new MealGroup() { LongName = "Add Ons", ShortName = "am" };
-        public static MealGroup addMealGroup6 = new MealGroup() { LongName = "Additional Meals", ShortName = "asm" };
-        public static MealGroup addSmoothieGroup6 = new MealGroup() { LongName = "Additional Smoothies", ShortName = "as" };
+        public static MealGroup addAddOnGroup6 = new MealGroup() { LongName = "Add Ons" };
+        public static MealGroup addMealGroup6 = new MealGroup() { LongName = "Additional Meals" };
+        public static MealGroup addSmoothieGroup6 = new MealGroup() { LongName = "Additional Smoothies" };
 
-        String infoImg = "info.jpg";
+        String infoImg = "info.jpeg";
         public double subTotal;
-        public static string yellow = "#FFE573";
+        public static string postUrl;
+        public static string pid;
+        public static int weekNumber;
+        public static List<DateTimeOffset> weekAffectedList;
+        public static string[] deliveryDayList;
+        public static string yellow = "#ce790d";
         public static string def = "#F5F5F5";
         public Color colorToReturn = Color.FromHex("#F5F5F5");
+        public MealSchedule currentMealSchedule;
 
         public AddOnChoices()
         {
@@ -69,10 +75,22 @@ namespace InfiniteMeals.ViewModel.MealSelect
 
         }
 
+        public AddOnChoices(MealSchedule mealSchedule)
+        {
+            InitializeComponent();
+            this.currentMealSchedule = mealSchedule;
+            getData();
+        }
+
         public void getData()
         {
-            MealSchedule ms = new MealSchedule();
-            int weekNumber = ms.getNum();
+            //MealSchedule ms = new MealSchedule();
+            MealSchedule ms = this.currentMealSchedule;
+            weekNumber = ms.getNum();
+            System.Diagnostics.Debug.WriteLine("HERE IS THE WEEK NUM" + weekNumber);
+
+
+
             // Normal Meals
             List<String> AddNames = new List<String>();
             List<String> AddDesc = new List<String>();
@@ -104,7 +122,7 @@ namespace InfiniteMeals.ViewModel.MealSelect
 
 
             WebClient client = new WebClient();
-            var content =  client.DownloadString("https://uavi7wugua.execute-api.us-west-1.amazonaws.com/dev/api/v2/meals");
+            var content = client.DownloadString("https://uavi7wugua.execute-api.us-west-1.amazonaws.com/dev/api/v2/meals");
             var obj = JsonConvert.DeserializeObject<Data>(content);
 
             if (weekNumber == 1)
@@ -132,7 +150,6 @@ namespace InfiniteMeals.ViewModel.MealSelect
                     {
                         imageMeal = jsonObject.Menu[placeHolder].MealPhotoUrl.ToString();
                         AddImage.Add(imageMeal);
-
                     }
 
                     Meal holder = new Meal
@@ -250,7 +267,7 @@ namespace InfiniteMeals.ViewModel.MealSelect
                 grouped.Add(addMealGroup);
                 grouped.Add(addSmoothieGroup);
             }
-            else if(weekNumber == 2)
+            else if (weekNumber == 2)
             {
                 var jsonObjectLength = obj.Result.MenuForWeek2.Addons.AddonsAddons.Menu.Length;
                 var jsonObject = obj.Result.MenuForWeek2.Addons.AddonsAddons;
@@ -537,7 +554,7 @@ namespace InfiniteMeals.ViewModel.MealSelect
                 grouped3.Add(addMealGroup3);
                 grouped3.Add(addSmoothieGroup3);
             }
-            else if(weekNumber == 4)
+            else if (weekNumber == 4)
             {
                 var jsonObjectLength = obj.Result.MenuForWeek4.Addons.AddonsAddons.Menu.Length;
                 var jsonObject = obj.Result.MenuForWeek4.Addons.AddonsAddons;
@@ -680,7 +697,7 @@ namespace InfiniteMeals.ViewModel.MealSelect
                 grouped4.Add(addMealGroup4);
                 grouped4.Add(addSmoothieGroup4);
             }
-            else if(weekNumber == 5)
+            else if (weekNumber == 5)
             {
                 var jsonObjectLength = obj.Result.MenuForWeek5.Addons.AddonsAddons.Menu.Length;
                 var jsonObject = obj.Result.MenuForWeek5.Addons.AddonsAddons;
@@ -1009,50 +1026,50 @@ namespace InfiniteMeals.ViewModel.MealSelect
             lstView.SelectionMode = ListViewSelectionMode.None;
             lstView.IsGroupingEnabled = true;
             lstView.GroupDisplayBinding = new Binding("LongName");
-            lstView.GroupShortNameBinding = new Binding("ShortName");
 
             lstView.ItemTemplate = new DataTemplate(() =>
             {
-            var grid = new Grid
-            {
-                HeightRequest = 100,
-                VerticalOptions = LayoutOptions.FillAndExpand
-            };
-            var nameLabel = new Label
-            {
-                FontAttributes = FontAttributes.Bold,
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Center
-            };
-            var costLabel = new Label
-            {
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Center
-            };
-            var imgLabel = new Image
-            {
-                WidthRequest = 150,
-                HeightRequest = 75,
-                Aspect = Aspect.AspectFill,
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-                VerticalOptions = LayoutOptions.CenterAndExpand
-            };
-            imgLabel.Margin = new Thickness(10, 0, 0, 10);
-            var infoButton = new ImageButton
-            {
-                WidthRequest = 20,
-                HeightRequest = 20,
-                Aspect = Aspect.AspectFit,
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Center,
-            };
-            infoButton.Clicked += (sender, e) =>
-            {
-                ImageButton stepper = sender as ImageButton;
-                var model = stepper.BindingContext as Meal;
-                DisplayAlert("Ingredients", model.description.ToString(), "OK");
-            };
+                var grid = new Grid
+                {
+                    HeightRequest = 100,
+                    VerticalOptions = LayoutOptions.FillAndExpand
+                };
+                var nameLabel = new Label
+                {
+                    FontAttributes = FontAttributes.Bold,
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center
+                };
+                var costLabel = new Label
+                {
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center
+                };
+                var imgLabel = new Image
+                {
+                    WidthRequest = 150,
+                    HeightRequest = 75,
+                    Aspect = Aspect.AspectFill,
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    VerticalOptions = LayoutOptions.CenterAndExpand
+                };
+                imgLabel.Margin = new Thickness(10, 0, 0, 10);
+                var infoButton = new ImageButton
+                {
+                    WidthRequest = 20,
+                    HeightRequest = 20,
+                    Aspect = Aspect.AspectFit,
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center,
+                };
+                infoButton.Clicked += (sender, e) =>
+                {
+                    ImageButton stepper = sender as ImageButton;
+                    var model = stepper.BindingContext as Meal;
+                    DisplayAlert("Ingredients", model.description.ToString(), "OK");
+                };
 
+                /*
             var steppers = new Stepper
             {
                 Value = 0,
@@ -1064,7 +1081,7 @@ namespace InfiniteMeals.ViewModel.MealSelect
                 VerticalOptions = LayoutOptions.Center,
 
             };
-            steppers.Margin = new Thickness(40, 0, 0, 0); ;
+            steppers.Margin = new Thickness(40, 0, 0, 0);
 
             steppers.ValueChanged += (sender, e) =>
             {
@@ -1119,18 +1136,105 @@ namespace InfiniteMeals.ViewModel.MealSelect
 
             };
 
-                
+                */
+
+
+                // Decrement Button
+                var decrementMealQuantityButton = new Button
+                {
+                    Text = "-"
+                };
+
+                decrementMealQuantityButton.Clicked += (sender, e) => {
+                    Button btn = sender as Button;
+                    Meal meal = btn.BindingContext as Meal;
+                    if (meal.qty == 0)
+                    {
+                        return;
+                    }
+                    meal.qty -= 1;
+                    if (meal.qty == 0)
+                    {
+
+                        if (mealQtyDict.ContainsKey(meal.id))
+                        {
+                            mealQtyDict.Remove(meal.id);
+                            System.Diagnostics.Debug.WriteLine(meal.id + " was removed");
+                        }
+                    }
+                    else
+                    {
+                        mealQtyDict[meal.id] = meal.qty;
+                    }
+
+                    subTotal -= meal.price;
+                    meal.total = subTotal;
+                    if (subTotal < 0)
+                    {
+                        subTotal = 0.00;
+                        meal.total = subTotal;
+                    }
+
+                    if (subTotal == 0)
+                    {
+                        totalBar.Text = "Close";
+                    }
+                    else
+                    {
+                        totalBar.Text = string.Format("Agree to Pay: ${0:#,0.00}", subTotal);
+                    }
+
+                };
+
+
+                // Increment Button
+                var incrementMealQuantityButton = new Button
+                {
+                    Text = "+"
+                };
+
+
+                incrementMealQuantityButton.Clicked += (sender, e) => {
+                    Button btn = sender as Button;
+                    Meal meal = btn.BindingContext as Meal;
+
+                    meal.qty += 1;
+                    //model.qty = (int)steppers.Value;
+                    subTotal += meal.price;
+                    meal.total = subTotal;
+
+                    if (!mealQtyDict.ContainsKey(meal.id))
+                    {
+                        mealQtyDict.Add(meal.id, meal.qty);
+                    }
+                    else
+                    {
+                        mealQtyDict[meal.id] = meal.qty;
+                    }
+
+                    if (subTotal == 0)
+                    {
+                        totalBar.Text = "Close";
+                    }
+                    else
+                    {
+                        totalBar.Text = string.Format("Agree to Pay: ${0:#,0.00}", subTotal);
+                    }
+                };
+
+
+                // Quantity Label 
                 quantity = new Label
                 {
                     FontSize = 15,
                     FontAttributes = FontAttributes.Bold,
-                    HorizontalOptions = LayoutOptions.Start,
+                    HorizontalOptions = LayoutOptions.Center,
                     VerticalOptions = LayoutOptions.Center,
                     VerticalTextAlignment = TextAlignment.Center,
                     HorizontalTextAlignment = TextAlignment.Center,
 
                 };
-                
+
                 nameLabel.SetBinding(Label.TextProperty, "name");
                 costLabel.SetBinding(Label.TextProperty, "price");
                 quantity.SetBinding(Label.TextProperty, "qty");
@@ -1145,8 +1249,10 @@ namespace InfiniteMeals.ViewModel.MealSelect
                 nameLabel.SetValue(Grid.RowSpanProperty, 2);
                 nameLabel.SetValue(Grid.ColumnSpanProperty, 2);
                 grid.Children.Add(infoButton, 4, 0);
-                grid.Children.Add(steppers, 3, 1);
-                steppers.SetValue(Grid.ColumnSpanProperty, 3);
+                //grid.Children.Add(steppers, 3, 1);
+                //steppers.SetValue(Grid.ColumnSpanProperty, 3);
+                grid.Children.Add(decrementMealQuantityButton, 4, 1);
+                grid.Children.Add(incrementMealQuantityButton, 5, 1);
                 grid.Children.Add(quantity, 5, 0);
 
                 return new ViewCell { View = grid, Height = 100 };
@@ -1160,7 +1266,7 @@ namespace InfiniteMeals.ViewModel.MealSelect
         public async void postData(object sender, EventArgs e)
         {
             HttpClient client = new HttpClient();
-            MealSchedule ms = new MealSchedule();
+            MealSchedule ms = this.currentMealSchedule;
             int weekNumber = ms.getNum();
             string postUrl = ms.getPlanPicked();
             string pid = ms.getPlanNumPicked();
@@ -1172,13 +1278,19 @@ namespace InfiniteMeals.ViewModel.MealSelect
             emptyDict.Add("", 0);
 
             // If no changes
+            System.Diagnostics.Debug.WriteLine("TotalBar text: " + totalBar.Text + " " + mealQtyDict.Count + " " + weekNumber + " " + postUrl + " " + pid);
+
             if (mealQtyDict.Count == 0 && !totalBar.Text.Equals("Close"))
             {
-                BackToSchedule(sender, e);
+                System.Diagnostics.Debug.WriteLine("Pop Async");
+                //BackToSchedule(sender, e);
+                await Navigation.PopAsync();
             }
             // If no add ons
             else if (mealQtyDict.Count == 0)
             {
+                System.Diagnostics.Debug.WriteLine("TotalBar text quantity 0");
+
                 colorToReturn = Color.FromHex(def);
                 var mealSelectInfoToSend = new AddonInfo
                 {
@@ -1216,45 +1328,67 @@ namespace InfiniteMeals.ViewModel.MealSelect
                         MealSchedule mealSchedulePage = (MealSchedule)this.BindingContext;
                         Button test = (Button)mealSchedulePage.FindByName("AddonButton");
                         test.BackgroundColor = Color.FromHex(def);
+                        test.TextColor = Color.Black;
                     }
                     else if (weekNumber == 2)
                     {
                         MealSchedule mealSchedulePage = (MealSchedule)this.BindingContext;
                         Button test = (Button)mealSchedulePage.FindByName("AddonButton2");
                         test.BackgroundColor = Color.FromHex(def);
+                        test.TextColor = Color.Black;
+
                     }
                     else if (weekNumber == 3)
                     {
                         MealSchedule mealSchedulePage = (MealSchedule)this.BindingContext;
                         Button test = (Button)mealSchedulePage.FindByName("AddonButton3");
                         test.BackgroundColor = Color.FromHex(def);
+                        test.TextColor = Color.Black;
+
                     }
                     else if (weekNumber == 4)
                     {
                         MealSchedule mealSchedulePage = (MealSchedule)this.BindingContext;
                         Button test = (Button)mealSchedulePage.FindByName("AddonButton4");
                         test.BackgroundColor = Color.FromHex(def);
+                        test.TextColor = Color.Black;
+
                     }
                     else if (weekNumber == 5)
                     {
                         MealSchedule mealSchedulePage = (MealSchedule)this.BindingContext;
                         Button test = (Button)mealSchedulePage.FindByName("AddonButton5");
                         test.BackgroundColor = Color.FromHex(def);
+                        test.TextColor = Color.Black;
+
                     }
                     else if (weekNumber == 6)
                     {
                         MealSchedule mealSchedulePage = (MealSchedule)this.BindingContext;
                         Button test = (Button)mealSchedulePage.FindByName("AddonButton6");
                         test.BackgroundColor = Color.FromHex(def);
+                        test.TextColor = Color.Black;
+
                     }
 
                 }
-                BackToSchedule(sender, e);
+                await Navigation.PopAsync();
+
+                //BackToSchedule(sender, e);
 
             }
             // If the add ons are not empty
             else
             {
+                System.Diagnostics.Debug.WriteLine("TotalBar text: multiple quantity");
+
+                foreach (var item in mealQtyDict)
+                {
+                    System.Diagnostics.Debug.WriteLine("Dictionary: " + item.Key + item.Value);
+
+                }
+
+
                 var mealSelectInfoToSend = new AddonInfo
                 {
                     PurchaseId = pid,                  // Constant for now
@@ -1289,36 +1423,47 @@ namespace InfiniteMeals.ViewModel.MealSelect
                     MealSchedule mealSchedulePage = (MealSchedule)this.BindingContext;
                     Button test = (Button)mealSchedulePage.FindByName("AddonButton");
                     test.BackgroundColor = Color.FromHex(yellow);
+                    test.TextColor = Color.White;
                 }
                 else if (weekNumber == 2)
                 {
                     MealSchedule mealSchedulePage = (MealSchedule)this.BindingContext;
                     Button test = (Button)mealSchedulePage.FindByName("AddonButton2");
                     test.BackgroundColor = Color.FromHex(yellow);
+                    test.TextColor = Color.White;
+
                 }
                 else if (weekNumber == 3)
                 {
                     MealSchedule mealSchedulePage = (MealSchedule)this.BindingContext;
                     Button test = (Button)mealSchedulePage.FindByName("AddonButton3");
                     test.BackgroundColor = Color.FromHex(yellow);
+                    test.TextColor = Color.White;
+
                 }
                 else if (weekNumber == 4)
                 {
                     MealSchedule mealSchedulePage = (MealSchedule)this.BindingContext;
                     Button test = (Button)mealSchedulePage.FindByName("AddonButton4");
                     test.BackgroundColor = Color.FromHex(yellow);
+                    test.TextColor = Color.White;
+
                 }
                 else if (weekNumber == 5)
                 {
                     MealSchedule mealSchedulePage = (MealSchedule)this.BindingContext;
                     Button test = (Button)mealSchedulePage.FindByName("AddonButton5");
                     test.BackgroundColor = Color.FromHex(yellow);
+                    test.TextColor = Color.White;
+
                 }
                 else if (weekNumber == 6)
                 {
                     MealSchedule mealSchedulePage = (MealSchedule)this.BindingContext;
                     Button test = (Button)mealSchedulePage.FindByName("AddonButton6");
                     test.BackgroundColor = Color.FromHex(yellow);
+                    test.TextColor = Color.White;
+
                 }
                 BackToSchedule(sender, e);
             }

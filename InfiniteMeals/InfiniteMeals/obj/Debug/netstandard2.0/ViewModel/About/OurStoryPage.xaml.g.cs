@@ -13,7 +13,7 @@
 namespace InfiniteMeals.ViewModel.About {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("ViewModel\\About\\OurStoryPage.xaml")]
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("ViewModel/About/OurStoryPage.xaml")]
     public partial class OurStoryPage : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]

@@ -15,7 +15,7 @@
                SelectedIndexChanged="SubscriptionPicker_SelectedIndexChanged"
             />
             <Label x:Name="nullPicker" Text ="Please Select a Subscription" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center"></Label>
-            <Label x:Name="HeaderLabel" Margin = "0,20,0,0" FontSize ="18" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label x:Name="HeaderLabel" Margin = "0,20,0,0" FontSize ="18"  HorizontalOptions="Center" VerticalOptions="Center"/>
 
             <Grid x:Name="ButtonStack"
                 HorizontalOptions="Center"
@@ -52,7 +52,8 @@
                     x:Name="SundayButton"
                     BorderColor="Black"
                     BorderWidth="0.1"
-                    Margin="30,0,0,0"
+                    FontFamily="CapsRegular"
+                    Margin="10,0,0,0"
                     WidthRequest="100"
                     HeightRequest="100"
                     VerticalOptions="Start"
@@ -64,6 +65,7 @@
                     Clicked="ClickedColor" />
             <Button ClassId = "MonButton"
                     x:Name="MondayButton"
+                    FontFamily="CapsRegular"
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
                     WidthRequest="100"
@@ -81,9 +83,10 @@
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
                     BorderWidth="0.1"
-                                        WidthRequest="100"
+                    FontFamily="CapsRegular"
+                    WidthRequest="100"
                     HeightRequest="100"
-                    Margin="0,0,30,0"
+                    Margin="0,0,10,0"
                     VerticalOptions="Start"
                     HorizontalOptions="Center"
                     Text="Skip This Week"
@@ -92,6 +95,7 @@
                     Clicked="ClickedColor"/>
             <Button ClassId = "SelectButton"
                     x:Name="SelectButton"
+                    FontFamily="CapsRegular"
                     WidthRequest="100"
                     HeightRequest="100"
                     BackgroundColor="#F5F5F5"
@@ -105,12 +109,13 @@
                     Clicked="ClickedSelectMeal"/>
             <Button ClassId = "SurpriseButton"
                     x:Name="SurpriseButton"
+                    FontFamily="CapsRegular"
                     BackgroundColor="#F5F5F5"
                     WidthRequest="100"
                     HeightRequest="100"
                     BorderColor="Black"
                     BorderWidth="0.1"
-                    Margin="30,0,0,0"
+                    Margin="10,0,0,0"
                     VerticalOptions="Start"
                     HorizontalOptions="Center"
                     Text="Surprise Me"
@@ -119,9 +124,10 @@
                     Clicked="clickSurprise"/>
             <Button ClassId = "AddButton"
                     x:Name="AddonButton"
+                    FontFamily="CapsRegular"
                     WidthRequest="100"
                     HeightRequest="100"
-                    Margin="0,0,30,0"
+                    Margin="0,0,10,0"
                     HorizontalOptions="Center"
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
@@ -134,11 +140,12 @@
 
                 <Button ClassId = "SunButton2"
                     x:Name="SundayButton2"
+                    FontFamily="CapsRegular"
                     WidthRequest="100"
                     HeightRequest="100"
                     BorderColor="Black"
                     BorderWidth="0.1"
-                    Margin="30,0,0,0"
+                    Margin="10,0,0,0"
                     VerticalOptions="Start"
                     Text="Sunday&#x0a;Jun 7"
                     HorizontalOptions="Center"
@@ -149,6 +156,7 @@
 
             <Button ClassId = "MonButton2"
                     x:Name="MondayButton2"
+                    FontFamily="CapsRegular"
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
                     BorderWidth="0.1"
@@ -161,14 +169,16 @@
                     Grid.Column="1"
                     Grid.Row="4"
                     Clicked="ClickedColor"/>
+
             <Button ClassId = "SkipButton2"
                     x:Name="SkipButton2"
+                    FontFamily="CapsRegular"
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
                     WidthRequest="100"
                     HeightRequest="100"
                     BorderWidth="0.1"
-                    Margin="0,0,30,0"
+                    Margin="0,0,10,0"
                     VerticalOptions="Start"
                     HorizontalOptions="Center"
                     Text="Skip This Week"
@@ -177,6 +187,8 @@
                     Clicked="ClickedColor"/>
             <Button ClassId = "SelectButton2"
                     x:Name="SelectButton2"
+                                        FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
                     BackgroundColor="#F5F5F5"
@@ -190,8 +202,10 @@
                     Clicked="ClickedSelectMeal"/>
             <Button ClassId = "SurpriseButton2"
                     x:Name="SurpriseButton2"
+                                        FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
-                    Margin="30,0,0,0"
+                    Margin="10,0,0,0"
                     HeightRequest="100"
                     BorderColor="Black"
                     BorderWidth="0.1"
@@ -204,9 +218,11 @@
                     Clicked="clickSurprise"/>
             <Button ClassId = "AddButton2"
                     x:Name="AddonButton2"
+                                        FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
-                    Margin="0,0,30,0"
+                    Margin="0,0,10,0"
                     HorizontalOptions="Center"
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
@@ -221,11 +237,13 @@
 
                 <Button ClassId = "SunButton3"
                     x:Name="SundayButton3"
+                                            FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
                     BorderColor="Black"
                     BorderWidth="0.1"
-                    Margin="30,0,0,0"
+                    Margin="10,0,0,0"
                     VerticalOptions="Start"
                     Text="Sunday&#x0a;Jun 7"
                     HorizontalOptions="Center"
@@ -236,6 +254,8 @@
 
             <Button ClassId = "MonButton3"
                     x:Name="MondayButton3"
+                                        FontFamily="CapsRegular"
+                    
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
                     BorderWidth="0.1"
@@ -250,12 +270,14 @@
                     Clicked="ClickedColor"/>
             <Button ClassId = "SkipButton3"
                     x:Name="SkipButton3"
+                                        FontFamily="CapsRegular"
+                    
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
                     WidthRequest="100"
                     HeightRequest="100"
                     BorderWidth="0.1"
-                    Margin="0,0,30,0"
+                    Margin="0,0,10,0"
                     VerticalOptions="Start"
                     HorizontalOptions="Center"
                     Text="Skip This Week"
@@ -264,6 +286,8 @@
                     Clicked="ClickedColor"/>
             <Button ClassId = "SelectButton3"
                     x:Name="SelectButton3"
+                                        FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
                     BackgroundColor="#F5F5F5"
@@ -277,10 +301,12 @@
                     Clicked="ClickedSelectMeal"/>
             <Button ClassId = "SurpriseButton3"
                     x:Name="SurpriseButton3"
+                                        FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
                     BorderColor="Black"
-                    Margin="30,0,0,0"
+                    Margin="10,0,0,0"
                     BorderWidth="0.1"
                     VerticalOptions="Start"
                     HorizontalOptions="Center"
@@ -291,9 +317,11 @@
                     Clicked="clickSurprise"/>
             <Button ClassId = "AddButton3"
                     x:Name="AddonButton3"
+                                        FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
-                    Margin="0,0,30,0"
+                    Margin="0,0,10,0"
                     HorizontalOptions="Center"
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
@@ -306,11 +334,13 @@
 
                 <Button ClassId = "SunButton4"
                     x:Name="SundayButton4"
+                                            FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
                     BorderColor="Black"
                     BorderWidth="0.1"
-                    Margin="30,0,0,0"
+                    Margin="10,0,0,0"
                     VerticalOptions="Start"
                     Text="Sunday&#x0a;Jun 7"
                     HorizontalOptions="Center"
@@ -321,6 +351,8 @@
 
             <Button ClassId = "MonButton4"
                     x:Name="MondayButton4"
+                                        FontFamily="CapsRegular"
+                    
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
                     BorderWidth="0.1"
@@ -335,12 +367,14 @@
                     Clicked="ClickedColor"/>
             <Button ClassId = "SkipButton4"
                     x:Name="SkipButton4"
+                                        FontFamily="CapsRegular"
+                    
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
                     WidthRequest="100"
                     HeightRequest="100"
                     BorderWidth="0.1"
-                    Margin="0,0,30,0"
+                    Margin="0,0,10,0"
                     VerticalOptions="Start"
                     HorizontalOptions="Center"
                     Text="Skip This Week"
@@ -349,6 +383,8 @@
                     Clicked="ClickedColor"/>
             <Button ClassId = "SelectButton4"
                     x:Name="SelectButton4"
+                                        FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
                     BackgroundColor="#F5F5F5"
@@ -362,10 +398,12 @@
                     Clicked="ClickedSelectMeal"/>
             <Button ClassId = "SurpriseButton4"
                     x:Name="SurpriseButton4"
+                                        FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
                     BorderColor="Black"
-                    Margin="30,0,0,0"
+                    Margin="10,0,0,0"
                     BorderWidth="0.1"
                     VerticalOptions="Start"
                     HorizontalOptions="Center"
@@ -376,9 +414,11 @@
                     Clicked="clickSurprise"/>
             <Button ClassId = "AddButton4"
                     x:Name="AddonButton4"
+                                        FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
-                    Margin="0,0,30,0"
+                    Margin="0,0,10,0"
                     HorizontalOptions="Center"
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
@@ -394,11 +434,13 @@
 
                 <Button ClassId = "SunButton5"
                     x:Name="SundayButton5"
+                                            FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
                     BorderColor="Black"
                     BorderWidth="0.1"
-                    Margin="30,0,0,0"
+                    Margin="10,0,0,0"
                     VerticalOptions="Start"
                     Text="Sunday&#x0a;Jun 7"
                     HorizontalOptions="Center"
@@ -409,6 +451,8 @@
 
             <Button ClassId = "MonButton5"
                     x:Name="MondayButton5"
+                                        FontFamily="CapsRegular"
+                    
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
                     BorderWidth="0.1"
@@ -423,12 +467,14 @@
                     Clicked="ClickedColor"/>
             <Button ClassId = "SkipButton5"
                     x:Name="SkipButton5"
+                                        FontFamily="CapsRegular"
+                    
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
                     WidthRequest="100"
                     HeightRequest="100"
                     BorderWidth="0.1"
-                    Margin="0,0,30,0"
+                    Margin="0,0,10,0"
                     VerticalOptions="Start"
                     HorizontalOptions="Center"
                     Text="Skip This Week"
@@ -437,6 +483,8 @@
                     Clicked="ClickedColor"/>
             <Button ClassId = "SelectButton5"
                     x:Name="SelectButton5"
+                                        FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
                     BackgroundColor="#F5F5F5"
@@ -450,9 +498,11 @@
                     Clicked="ClickedSelectMeal"/>
             <Button ClassId = "SurpriseButton5"
                     x:Name="SurpriseButton5"
+                                        FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
-                    Margin="30,0,0,0"
+                    Margin="10,0,0,0"
                     BorderColor="Black"
                     BorderWidth="0.1"
                     VerticalOptions="Start"
@@ -464,9 +514,11 @@
                     Clicked="clickSurprise"/>
             <Button ClassId = "AddButton5"
                     x:Name="AddonButton5"
+                                        FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
-                    Margin="0,0,30,0"
+                    Margin="0,0,10,0"
                     HorizontalOptions="Center"
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
@@ -481,11 +533,13 @@
 
                 <Button ClassId = "SunButton6"
                     x:Name="SundayButton6"
+                                            FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
                     BorderColor="Black"
                     BorderWidth="0.1"
-                    Margin="30,0,0,0"
+                    Margin="10,0,0,0"
                     VerticalOptions="Start"
                     Text="Sunday&#x0a;Jun 7"
                     HorizontalOptions="Center"
@@ -496,6 +550,8 @@
 
             <Button ClassId = "MonButton6"
                     x:Name="MondayButton6"
+                                        FontFamily="CapsRegular"
+                    
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
                     BorderWidth="0.1"
@@ -510,12 +566,14 @@
                     Clicked="ClickedColor"/>
             <Button ClassId = "SkipButton6"
                     x:Name="SkipButton6"
+                                        FontFamily="CapsRegular"
+                    
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"
                     WidthRequest="100"
                     HeightRequest="100"
                     BorderWidth="0.1"
-                    Margin="0,0,30,0"
+                    Margin="0,0,10,0"
                     VerticalOptions="Start"
                     HorizontalOptions="Center"
                     Text="Skip This Week"
@@ -524,6 +582,8 @@
                     Clicked="ClickedColor"/>
             <Button ClassId = "SelectButton6"
                     x:Name="SelectButton6"
+                                        FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
                     BackgroundColor="#F5F5F5"
@@ -537,7 +597,9 @@
                     Clicked="ClickedSelectMeal"/>
             <Button ClassId = "SurpriseButton6"
                     x:Name="SurpriseButton6"
-                    Margin="30,0,0,0"
+                                        FontFamily="CapsRegular"
+                    
+                    Margin="10,0,0,0"
                     WidthRequest="100"
                     HeightRequest="100"
                     BorderColor="Black"
@@ -551,9 +613,11 @@
                     Clicked="clickSurprise"/>
             <Button ClassId = "AddButton6"
                     x:Name="AddonButton6"
+                                        FontFamily="CapsRegular"
+                    
                     WidthRequest="100"
                     HeightRequest="100"
-                    Margin="0,0,30,0"
+                    Margin="0,0,10,0"
                     HorizontalOptions="Center"
                     BackgroundColor="#F5F5F5"
                     BorderColor="Black"

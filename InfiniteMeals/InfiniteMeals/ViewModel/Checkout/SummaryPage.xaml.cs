@@ -105,9 +105,13 @@ namespace InfiniteMeals.ViewModel.Checkout {
                 var httpContent = new StringContent(orderContentJson, Encoding.UTF8, "application/json"); // encode orderContentJson into format to send to database
 
                 var response = await client.PostAsync(checkoutURL, httpContent); // try to post to database
+                System.Diagnostics.Debug.WriteLine("RESPONSE" + response);
+
                 return response.StatusCode;
             }
             catch (Exception ex) {
+                System.Diagnostics.Debug.WriteLine("CATCH");
+
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
 

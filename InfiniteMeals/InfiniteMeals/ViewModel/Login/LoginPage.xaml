@@ -37,6 +37,7 @@
             </StackLayout>
             </StackLayout>
 
+
             <StackLayout Orientation="Horizontal" VerticalOptions="End" Margin="0, 0, 0, 30">
                 <Label x:Name="versionNumber" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="Medium" TextColor="Black" FontAttributes="Bold" />
             </StackLayout>

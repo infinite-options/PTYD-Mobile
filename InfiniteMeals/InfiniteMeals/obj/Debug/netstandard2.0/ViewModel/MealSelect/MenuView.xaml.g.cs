@@ -13,7 +13,7 @@
 namespace InfiniteMeals.ViewModel.MealSelect {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("ViewModel\\MealSelect\\MenuView.xaml")]
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("ViewModel/MealSelect/MenuView.xaml")]
     public partial class MenuView : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]

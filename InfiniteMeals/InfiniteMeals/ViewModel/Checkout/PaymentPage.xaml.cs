@@ -7,7 +7,9 @@ using Xamarin.Forms.Xaml;
 using InfiniteMeals.Model.Checkout;
 using InfiniteMeals.Utilities.Converters;
 using InfiniteMeals.Model.Subscribe;
-
+using System.Net;
+using InfiniteMeals.Model.Database;
+using Newtonsoft.Json;
 
 namespace InfiniteMeals.ViewModel.Checkout {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -15,10 +17,59 @@ namespace InfiniteMeals.ViewModel.Checkout {
     // second step in checkout process
     // prompts user to fill out delivery instructions and payment info
     public partial class PaymentPage : ContentPage {
+
+        private string acctUrl = "https://uavi7wugua.execute-api.us-west-1.amazonaws.com/dev/api/v2/accountpurchases/";
+        private static string userID;
+
         public PaymentPage() {
             InitializeComponent();
-
+            preloadDeliveryInfo();
             
+        }
+
+        // Preloads Existing Entries to Text Fields
+        private void preloadDeliveryInfo()
+        {
+            WebClient client = new WebClient();
+            // Get user zipcodes
+            var table = App.Database.GetLastItem();
+            userID = table.UserUid;
+            var userInfo = client.DownloadString(acctUrl + userID);
+            var userInfoObj = JsonConvert.DeserializeObject<UserInformation>(userInfo);
+
+            string expDate = (string) userInfoObj.Result[0].CcExpDate.ToString();
+
+            this.expirationYearEntry.Text = expDate.Substring(0, 4);
+            this.expirationMonthEntry.Text = expDate.Substring(5, 2);
+            this.cardholderNameEntry.Text = userInfoObj.Result[0].DeliveryFirstName + " " + userInfoObj.Result[0].DeliveryLastName;
+            this.deliveryInstructionsEditor.Text = userInfoObj.Result[0].DeliveryInstructions;
+            this.cardNumberEntry.Text = userInfoObj.Result[0].CcNum;
+            this.cvvEntry.Text = userInfoObj.Result[0].CcCvv.ToString();
+
+            if (String.IsNullOrEmpty(cardholderNameEntry.Text))
+            {
+                this.cardholderNameWarning.IsVisible = true;
+            }
+            if (String.IsNullOrEmpty(deliveryInstructionsEditor.Text))
+            {
+                this.deliveryInstructionsWarning.IsVisible = true;
+            }
+            if (String.IsNullOrEmpty(cardNumberEntry.Text))
+            {
+                this.cardNumberMessage.IsVisible = true;
+            }
+            if (String.IsNullOrEmpty(cvvEntry.Text))
+            {
+                this.cvvWarning.IsVisible = true;
+            }
+            if (String.IsNullOrEmpty(expirationMonthEntry.Text))
+            {
+                this.expirationDateWarning.IsVisible = true;
+            }
+            if (String.IsNullOrEmpty(expirationYearEntry.Text))
+            {
+                this.expirationDateWarning.IsVisible = true;
+            }
         }
 
         // event handler for clicking continue to summary button

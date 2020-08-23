@@ -284,11 +284,11 @@ namespace InfiniteMeals.ViewModel.MealSelect
 
             }
 
-            if(weekNumber == 1)
+            if (weekNumber == 1)
             {
                 lstView.ItemsSource = grouped;
             }
-            else if(weekNumber == 2)
+            else if (weekNumber == 2)
             {
                 lstView.ItemsSource = grouped2;
             }
@@ -300,7 +300,7 @@ namespace InfiniteMeals.ViewModel.MealSelect
                 BackgroundColor = Color.Transparent,
             };
 
-            if(weekNumber == 1)
+            if (weekNumber == 1)
             {
                 switchWeek.Clicked += NextWeekMenu;
                 switchWeek.Text = "Next Week";
@@ -317,7 +317,6 @@ namespace InfiniteMeals.ViewModel.MealSelect
             lstView.Header = headingGrid;
             lstView.IsGroupingEnabled = true;
             lstView.GroupDisplayBinding = new Binding("LongName");
-            lstView.GroupShortNameBinding = new Binding("ShortName");
             lstView.ItemTemplate = new DataTemplate(() =>
             {
                 var grid = new Grid
@@ -357,6 +356,7 @@ namespace InfiniteMeals.ViewModel.MealSelect
             Content = lstView;
             BindingContext = this;
         }
+
        public void NextWeekMenu (object sender, EventArgs e)
         {
             weekNumber = 2;

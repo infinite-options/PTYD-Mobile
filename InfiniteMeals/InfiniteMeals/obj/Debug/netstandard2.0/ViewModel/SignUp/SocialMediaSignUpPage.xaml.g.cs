@@ -13,7 +13,7 @@
 namespace InfiniteMeals.ViewModel.SignUp {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("ViewModel\\SignUp\\SocialMediaSignUpPage.xaml")]
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("ViewModel/SignUp/SocialMediaSignUpPage.xaml")]
     public partial class SocialMediaSignUpPage : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
